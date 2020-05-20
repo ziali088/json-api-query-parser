@@ -1,9 +1,19 @@
 const _ = require('lodash');
 
-const includeParser = (param) => {
+const includeParser = (param, options = {}) => {
   const result = {};
   if (_.isEmpty(param)) return result;
-  param.split(',').forEach((req) => {
+
+  let string = param;
+  switch (options.convertCase) {
+    case 'camelCase':
+      string = string.replace(/-(\w)/g, (m, p1) => p1.toUpperCase());
+      break;
+    default:
+      break;
+  }
+
+  string.split(',').forEach((req) => {
     const relation = req.split('.').shift();
     const relationResources = req.split('.').slice(1);
 
@@ -15,7 +25,7 @@ const includeParser = (param) => {
       if (relationResources.length === 1) {
         result[relation] = _.union(result[relation], relationResources);
       } else {
-        result[relation] = _.union(result[relation], [includeParser(relationResources.join('.'))]);
+        result[relation] = _.union(result[relation], [includeParser(relationResources.join('.'), options)]);
       }
     }
   });

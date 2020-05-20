@@ -55,4 +55,11 @@ describe('IncludeParser', () => {
       single: [],
     });
   });
+
+  it('can parse include string with camelCase conversion', () => {
+    expect(includeParser('relation.foo-qux,relation.bar.baz-case,single-with-case', { convertCase: 'camelCase' })).to.deep.eq({
+      relation: ['fooQux', { bar: ['bazCase'] }],
+      singleWithCase: [],
+    });
+  });
 });
