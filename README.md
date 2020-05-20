@@ -1,4 +1,4 @@
-# JSON API Query Parser
+# JSON API Query Param Parser
 
 Provides a function to parse the `include` JSON API query parameter into an object.
 
@@ -15,7 +15,7 @@ The JSON API specification provides ways to request a resources relations (`incl
 # Usage
 
 ```js
-const { includeParser } = require('json-api-query-parser');
+const { includeParser } = require('json-api-query-param-parser');
 
 console.dir(includeParser('author'), { depth: null });
 // { author: [] }

@@ -1,5 +1,5 @@
 {
-  "name": "@ziali088/json-api-query-parser",
+  "name": "json-api-query-param-parser",
   "version": "0.1.0",
   "description": "Parse JSON API relationship and field parameters",
   "main": "index.js",
