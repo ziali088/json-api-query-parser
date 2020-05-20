@@ -26,22 +26,29 @@ describe('IncludeParser', () => {
     });
   });
 
-  it('can parse include string multiple different relations', () => {
+  it('can parse include string with multiple different relations', () => {
     expect(includeParser('single,relation.nested.deep.ohgosh')).to.deep.eq({
       relation: [{ nested: [{ deep: ['ohgosh'] }] }],
       single: [],
     });
   });
 
-  it('can parse include string multiple same relations', () => {
+  it('can parse include string with multiple same relations', () => {
     expect(includeParser('relation.foo,relation.bar')).to.deep.eq({
       relation: ['foo', 'bar'],
     });
   });
 
-  it('can parse include string multiple same relations deeply', () => {
+  it('can parse include string with multiple same relations deeply', () => {
     expect(includeParser('relation.foo,relation.bar.baz')).to.deep.eq({
       relation: ['foo', { bar: ['baz'] }],
+    });
+  });
+
+  it('can parse include string with multiple same relations all having deep includes', () => {
+    expect(includeParser('relation.foo.qux,relation.bar.baz,single')).to.deep.eq({
+      relation: [{ foo: ['qux'] }, { bar: ['baz'] }],
+      single: [],
     });
   });
 });
