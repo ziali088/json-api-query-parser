@@ -1,6 +1,6 @@
 {
   "name": "json-api-query-param-parser",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Parse JSON API relationship and field parameters",
   "repository": "github:ziali088/json-api-query-parser",
   "main": "index.js",
