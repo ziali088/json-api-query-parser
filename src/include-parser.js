@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
 const includeParser = (param) => {
-  let result = {};
+  const result = {};
   param.split(',').forEach((req) => {
     const relation = req.split('.').shift();
     const relationResources = req.split('.').slice(1);
@@ -11,18 +11,12 @@ const includeParser = (param) => {
     }
 
     if (!_.isEmpty(relationResources)) {
-      if (relationResources.length === 1 ) {
-        result[relation] = relationResources;
+      if (relationResources.length === 1) {
+        result[relation] = _.union(result[relation], relationResources);
       } else {
-        result[relation] = [includeParser(relationResources.join('.'))];
+        result[relation] = _.union(result[relation], [includeParser(relationResources.join('.'))]);
       }
     }
-    // param = author.comments.author
-    /**
-     * {
-     *  author: [{ comments: ['author'] }]
-     * }
-     */
   });
   return result;
 };
