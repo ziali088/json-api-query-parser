@@ -28,15 +28,26 @@ console.dir(includeParser('author.comments.author'), { depth: null });
 
 console.dir(includeParser('author.comments,author.books'), { depth: null });
 // { author: ['comments', 'books'] }
+
+console.dir(includeParser('author.comment-logs,author.books', { convertCase: 'camelCase' }), { depth: null });
+// { author: ['commentLogs', 'books'] }
 ```
 
 # Functions
 
-## includeParser (String param)
+## includeParser (String param, [Object options])
 
 Takes the given param and creates an object representing the relationships requested.
 
 The top level keys of the object represent the direct relations requested and will always have an array value, which will either be empty (meaning only the top level relation was requested) or contain the nested relations that were requested.
+
+You can also provide an object with the following options:
+
+- `convertCase`
+
+Accepted values: `['camelCase']`
+
+Will return the relations object camelCase'd.
 
 # TODO
 
