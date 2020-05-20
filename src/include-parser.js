@@ -2,6 +2,7 @@ const _ = require('lodash');
 
 const includeParser = (param) => {
   const result = {};
+  if (_.isEmpty(param)) return result;
   param.split(',').forEach((req) => {
     const relation = req.split('.').shift();
     const relationResources = req.split('.').slice(1);

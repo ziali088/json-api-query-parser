@@ -2,6 +2,10 @@ const { expect } = require('chai');
 const { includeParser } = require('../index');
 
 describe('IncludeParser', () => {
+  it('returns an empty object with no param', () => {
+    expect(includeParser()).to.deep.eq({});
+  });
+
   it('can parse include string with only top level relation', () => {
     expect(includeParser('relation')).to.deep.eq({
       relation: [],
